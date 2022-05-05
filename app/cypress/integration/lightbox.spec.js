@@ -4,8 +4,6 @@ describe('lightbox', () => {
         cy.visit('../../lightbox.html');
     });
     it('p should open lightbox,click on image', () => {
-
-        cy.dataCy("lightbox-overlay")
         //cy.get('input[name=cypher-key]').clear().type(3);
         //cy.get('textarea').type("Hello Word");
         cy.get('[data-cy=cypher-openimage]').click();
