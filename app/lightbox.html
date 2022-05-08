@@ -30,14 +30,14 @@
                 <div class="bg-white p-8 shadow-md rounded-sm">
                     <!-- Title -->
                     <h1 class="text-lg font-extrabold">Lightbox</h1>
-                    <h2 class="text-sm text-gray-400 mb-8">Alpine JS & Tailwind CSS</h1>
+                    <h2 class="text-sm text-gray-400 mb-8">Alpine JS & Tailwind CSS</h2>
 
                     <!-- Overlay -->
                     <div class="relative w-64 cursor-pointer shadow-md"
                          @mouseover="isOverlayVisible = true"
                          @mouseover.away="isOverlayVisible = false"
                          @click="openLightbox()"
-                         data-Cy="lightbox-overlay"
+                         data-cy="lightbox-overlay"
                     >
                         <!-- Image -->
                         <img src="https://picsum.photos/id/301/1024/1024" />
@@ -59,13 +59,13 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-4 h-4 mr-2">
                                         <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/>
                                     </svg>
-                                    <div class="text-sm text-white" x-text="likesCount"></div>
+                                    <div class="text-sm text-white" x-text="likesCount" data-cy="lightbox-overlay-like_count" ></div>
 
                                     <!-- Comments count -->
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-4 h-4 ml-6 mr-2">
                                         <path d="M12 1c-6.628 0-12 4.573-12 10.213 0 2.39.932 4.591 2.427 6.164l-2.427 5.623 7.563-2.26c9.495 2.598 16.437-3.251 16.437-9.527 0-5.64-5.372-10.213-12-10.213z"/>
                                     </svg>
-                                    <div class="text-sm text-white" x-text="commentsCount()"></div>
+                                    <div class="text-sm text-white" x-text="commentsCount()" data-cy="comment-count_overlay"></div>
                                 </div>
                             </div>
                         </div>
@@ -82,16 +82,13 @@
                  x-transition:leave="transition ease-out duration-200"
                  x-transition:leave-start="opacity-100 transform translate-y-0"
                  x-transition:leave-end="opacity-0 transform -translate-y-16"
-
-
-
             >
                 <!-- Lightbox -->
                 <div id="lightbox"
                      class="max-w-2xl m-auto overflow-y-auto shadow-md"
                      style="height: auto; max-height: 95vh;"
                      @click.away="closeLightbox()"
-                     data-Cy="lightbox"
+                     data-cy="lightbox"
                 >
 
                     <!-- Info bar -->
@@ -118,7 +115,6 @@
                                 viewBox="0 0 24 24" 
                                 class="h-3 w-3 fill-current text-black cursor-pointer transition duration-300 hover:text-gray-400"
                                 @click="closeLightbox()"
-                                 data-cy="cypher-closeimage1"
                             >
                                 <path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/>
                             </svg>
@@ -138,7 +134,7 @@
                             title="Like"
                             @click="isLiked = true; likesCount++;"
                             x-show="! isLiked"
-                             data-cy="cypher-like"
+                             data-cy="like"
                         >
                             <path d="M6.28 3c3.236.001 4.973 3.491 5.72 5.031.75-1.547 2.469-5.021 5.726-5.021 2.058 0 4.274 1.309 4.274 4.182 0 3.442-4.744 7.851-10 13-5.258-5.151-10-9.559-10-13 0-2.676 1.965-4.193 4.28-4.192zm.001-2c-3.183 0-6.281 2.187-6.281 6.192 0 4.661 5.57 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-4.011-3.097-6.182-6.274-6.182-2.204 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248z"/>
                         </svg>
@@ -149,12 +145,11 @@
                             title="Dislike"
                             @click="isLiked = false; likesCount--;"
                             x-show="isLiked"
-                             data-cy="cypher-unlike"
-
+                             data-cy="unlike"
                         >
                             <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/>
                         </svg>
-                        <div x-text="likesCount" class="text-xs font-semibold ml-2"></div>
+                        <div x-text="likesCount" class="text-xs font-semibold ml-2" data-cy="like-counter" ></div>
                     </div>
 
                     <!-- Caption  -->
@@ -170,6 +165,8 @@
                         <div class="text-xs text-gray-400 transtion duration-300 ease-in-out hover:text-black cursor-pointer" 
                              style="font-family: Poppins;"
                              x-text="displayCommentText()"
+                             data-cy="comment-counter"
+
                         >
                         </div>
                     </div>
@@ -193,11 +190,13 @@
                                     <div class="text-black text-xs" 
                                         style="font-family: Poppins;"
                                         x-text="comment.body"
+                                         data-cy="comment"
                                     >
                                     </div>   
                                     <div class="text-gray-500" 
                                         style="font-family: Poppins; font-size:0.65rem;"
                                         x-text="comment.author"
+                                         data-cy="author"
                                     >
                                     </div>   
                                 </div>
@@ -228,15 +227,14 @@
                                        style="font-family: Poppins;" 
                                        x-model="inputComment"
                                        x-on:input.debounce.100="isPublishButtonEnabled = (inputComment.length != 0) ? true : false;"
-                                       data-cy="cypher-comment"
+                                       data-cy="add-comment"
                                 />
                                 <button type="submit" 
                                         class="text-xs px-4 focus:outline-none"
                                         :class="(isPublishButtonEnabled) ? 'bg-black text-white transition duration-300 ease-in-out hover:bg-gray-600' : 'bg-gray-200 text-gray-400 cursor-not-allowed'"
                                         style="font-family: Poppins;"
                                         x-bind:disabled="! isPublishButtonEnabled"
-                                        data-cy="cypher-publish"
-
+                                        data-cy="publish"
                                 >
                                     Publish
                                 </button>
